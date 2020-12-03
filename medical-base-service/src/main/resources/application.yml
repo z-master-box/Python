@@ -1,0 +1,53 @@
+server:
+  # 端口配置
+  port: 1112
+  compression:
+    # 开启 gzip 压缩
+    enabled: true
+    min-response-size: 1024
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,application/javascript,text/css
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: true
+  type-aliases-package: com.od.entity
+  global-config:
+    db-config:
+      id-type: auto
+spring:
+  application:
+    name: medical-base-service
+  # 数据源配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/doctor?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: death206
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+    hikari:
+      ##  Hikari 连接池配置
+      ## 最小空闲连接数量
+      minimum-idle: 5
+      ## 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      ## 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      ## 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      ## 连接池名
+      pool-name: ODHikariCP
+      ## 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      ## 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: 20000226zjz...
+        server-addr: 47.94.149.206:9999
